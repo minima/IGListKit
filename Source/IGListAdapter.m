@@ -246,10 +246,17 @@
         }
     }
 
+    UIEdgeInsets adjustedContentInset;
+    if (@available(iOS 11.0, tvOS 11.0, *)) {
+        adjustedContentInset = collectionView.adjustedContentInset;
+    } else {
+        adjustedContentInset = collectionView.contentInset;
+    }
+
     const CGFloat offsetMid = (offsetMin + offsetMax) / 2.0;
     const CGFloat collectionViewWidth = collectionView.bounds.size.width;
     const CGFloat collectionViewHeight = collectionView.bounds.size.height;
-    const UIEdgeInsets contentInset = collectionView.contentInset;
+    const UIEdgeInsets contentInset = adjustedContentInset;
     CGPoint contentOffset = collectionView.contentOffset;
     switch (scrollDirection) {
         case UICollectionViewScrollDirectionHorizontal: {
